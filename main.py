@@ -4,8 +4,9 @@ import nest_asyncio
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, CallbackContext
 from datetime import datetime, date
+import os
 
-TELEGRAM_BOT_TOKEN = "7562092255:AAHqP1_pk2hlSjnQeWbpL6tJXw9hCvSknyk"
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # === Load Menu Data ===
 MENU_FILE = "menu.csv"
@@ -112,7 +113,7 @@ async def summary(update: Update, context: CallbackContext):
         if df_today.empty:
             await update.message.reply_text("No orders for today.")
         else:
-            summary_text = "\n".join([f"{row['username']} ordered {row['dish']} from {row['stall']} ({row['mall']})"
+            summary_text = "\n".join([f"{row['username']} ordered {row['dish']} from {row['stall']}"
                                      for _, row in df_today.iterrows()])
             await update.message.reply_text(f"Today's orders:\n{summary_text}")
 
