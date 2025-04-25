@@ -83,7 +83,7 @@ async def dish_handler(update: Update, context: CallbackContext):
     stall = context.user_data['stall']
     username = query.from_user.first_name
     log_order(username, mall, stall, dish)
-    await query.edit_message_text(text=f"✅ {username} ordered {dish} from {stall} at {mall}.")
+    await query.edit_message_text(text=f"✅ {username} - {dish} from {stall}")
 
 async def back_handler(update: Update, context: CallbackContext):
     query = update.callback_query
